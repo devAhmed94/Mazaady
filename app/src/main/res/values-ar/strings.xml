@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">مزادي</string>
+    <string name="categoryActivity_main_category">التصنيف الاساسي</string>
+    <string name="categoryActivity_sub_category">التصنيف الفرعي</string>
+    <string name="other">اخري</string>
+    <string name="specify">حدد هنا</string>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Mazaady</string>
+    <string name="categoryActivity_main_category">Main Category</string>
+    <string name="categoryActivity_sub_category">Sub Category</string>
+    <string name="other">other</string>
+    <string name="specify">Specify here</string>
+</resources>
