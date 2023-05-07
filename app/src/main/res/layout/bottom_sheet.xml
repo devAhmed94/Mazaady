@@ -32,20 +32,30 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Main Category"
             android:textColor="@color/doveGray"
             android:textSize="@dimen/_15ssp"
             app:layout_constraintBottom_toBottomOf="@+id/ivClose"
             app:layout_constraintEnd_toStartOf="@+id/ivClose"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ivClose" />
+            app:layout_constraintTop_toTopOf="@+id/ivClose"
+            tools:text="Main Category" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_25sdp"
+            android:hint="search "
+            android:paddingHorizontal="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@+id/etSearch" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

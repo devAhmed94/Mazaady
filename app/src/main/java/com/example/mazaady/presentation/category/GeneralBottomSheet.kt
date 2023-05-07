@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mazaady.databinding.BottomSheetBinding
@@ -26,9 +27,7 @@ class GeneralBottomSheet : BottomSheetDialogFragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = BottomSheetBinding.inflate(inflater, container, false)
         binding.clContainer.maxHeight = (resources.displayMetrics.heightPixels * 0.95).toInt()
@@ -73,6 +72,22 @@ class GeneralBottomSheet : BottomSheetDialogFragment() {
     private fun setListeners() {
         with(binding) {
             ivClose.setOnClickListener { dismiss() }
+
+            etSearch.doAfterTextChanged { text ->
+                val filterList = itemlist.filter { it.name.contains(text.toString(), true) }
+                when {
+                    filterList.isEmpty() -> listAdapter.fill(filterList)
+                    text.isNullOrEmpty() -> {
+                        listAdapter.fill(itemlist)
+                    }
+                    else -> {
+
+                        listAdapter.fill(filterList)
+                    }
+                }
+
+            }
+
         }
     }
 
