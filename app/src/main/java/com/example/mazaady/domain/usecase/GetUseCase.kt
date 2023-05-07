@@ -11,4 +11,6 @@ import com.example.mazaady.domain.repo.Repo
 class GetUseCase(private val repo: Repo) {
     suspend fun getCategories() = repo.getCategories()
     suspend fun getProps(cat:Int) = repo.getProps(cat)
+    suspend fun getOptions(id:Int) = repo.getOptions(id)
+
 }

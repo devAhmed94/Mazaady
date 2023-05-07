@@ -14,6 +14,7 @@ import com.example.mazaady.domain.repo.Repo
 class CategoriesRepoImpl(private val apiServices: ApiServices) :Repo {
     override suspend fun getCategories(): ResCategory =apiServices.getCategories()
     override suspend fun getProps(cat: Int): ResProps = apiServices.getProps(cat)
+    override suspend fun getOptions(id: Int): ResProps =apiServices.getOptions(id)
 
 
 }

@@ -12,4 +12,5 @@ import com.example.mazaady.domain.entities.ResProps
 interface Repo {
     suspend fun getCategories():ResCategory
     suspend fun getProps(cat:Int):ResProps
+    suspend fun getOptions(id:Int):ResProps
 }

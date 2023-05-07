@@ -12,12 +12,14 @@ data class ResProps(
     val msg: String
 ) {
     data class Data(
+        @SerializedName("child")
+        val child: Boolean?,
         @SerializedName("description")
         val description: Any?,
         @SerializedName("id")
         val id: Int,
         @SerializedName("list")
-        val list: Boolean,
+        val list: Boolean?,
         @SerializedName("name")
         val name: String,
         @SerializedName("options")
@@ -29,9 +31,9 @@ data class ResProps(
         @SerializedName("slug")
         val slug: String,
         @SerializedName("type")
-        val type: String,
+        val type: String?,
         @SerializedName("value")
-        val value: String
+        val value: String?
     ) {
         data class Option(
             @SerializedName("child")
