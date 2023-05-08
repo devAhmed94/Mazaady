@@ -1,6 +1,7 @@
 package com.example.mazaady.data.network
 
 import com.example.mazaady.domain.entities.ResCategory
+import com.example.mazaady.domain.entities.ResOption
 import com.example.mazaady.domain.entities.ResProps
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -21,5 +22,5 @@ interface ApiServices {
 
 
     @GET("get-options-child/{id}")
-    suspend fun getOptions(@Path("id") id: Int): ResProps
+    suspend fun getOptions(@Path("id") id: Int): ResOption
 }

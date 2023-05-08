@@ -3,7 +3,6 @@ package com.example.mazaady.presentation.category
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -16,6 +15,7 @@ import com.example.mazaady.app.utils.OTHER_ID
 import com.example.mazaady.databinding.ActivityCategoryBinding
 import com.example.mazaady.domain.entities.ItemListGeneralBottomSheet
 import com.example.mazaady.domain.entities.ResCategory
+import com.example.mazaady.domain.entities.ResOption
 import com.example.mazaady.domain.entities.ResProps
 import com.example.mazaady.presentation.details.DetailsActivity
 import com.google.android.material.textfield.TextInputEditText
@@ -32,23 +32,24 @@ class CategoryActivity : AppCompatActivity() {
     private lateinit var categoriesList: MutableList<ResCategory.Data.Category>
     private lateinit var subCategoryList: MutableList<ResCategory.Data.Category.Children>
     private lateinit var propsList: MutableList<ResProps.Data>
-    private lateinit var optionList: MutableList<ResProps.Data>
+
 
     private val itemBottomSheetList by lazy { mutableListOf<ItemListGeneralBottomSheet>() }
     private lateinit var itemClickedBinding: TextInputEditText
     private var itemClickedId = -1
     private var subCategorySelectedId = -1
 
-    // private var optionSelectedId = -1
+
     private var optionClickedName = ""
     private var optionSelectedIdWithoutOther = -1
     private var counterOfOther = 0
     private var counterOfLastOption = 0
 
     private val listEditMap by lazy { HashMap<String, TextInputEditText>() }
+    private val listEditMapOther by lazy { HashMap<String, TextInputLayout>() }
     private val ids by lazy { mutableListOf<Int>() }
 
-    //private val idsMap by lazy { HashMap<String, Int>() }
+    private val idsMapOption by lazy { HashMap<String, Int>() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,16 +80,19 @@ class CategoryActivity : AppCompatActivity() {
                 getProps()
 
             } else {
-                //optionSelectedId = it.id
+
+                if (listEditMapOther.keys.contains("other_${optionClickedName}")) {
+                    binding.llDynamicEditText.removeView(listEditMapOther["other_$optionClickedName"])
+                    counterOfOther--
+                }
 
                 if (it.id == OTHER_ID) {
                     counterOfOther++
                     drawOther(optionSelectedIdWithoutOther)
-                }
 
-                if (it.child != null && it.child) {
-                    Log.d("XXxXX", "getOptions: ${it.name} ${it.id} ")
-                    getOptions(it.id)
+                } else if (it.child != null && it.child == true) {
+
+                    settingOptions(it.id)
                 }
 
             }
@@ -96,27 +100,17 @@ class CategoryActivity : AppCompatActivity() {
         }
     }
 
-    private fun getOptions(id: Int) {
-
-        Log.d("XXxXX", "getOptions: test ")
+    private fun settingOptions(id: Int) {
         viewModel.getOptions(id)
-        // lifecycleScope.launch {
-        viewModel.options.observe(this@CategoryActivity) {
-            it?.data?.let { res ->
-                // Toast.makeText(this@CategoryActivity, list.size.toString(), Toast.LENGTH_SHORT).show()
-               // Log.d("XXxXX", "getOptions: $list ")
-                optionList = res as MutableList<ResProps.Data>
-                if (::optionList.isInitialized) {
-                    generateEditTextDynamic(optionList, true)
-                    // list.size
+        lifecycleScope.launch {
+            viewModel.options.collect {
+                it?.data?.let { opt ->
+                    drawOptions(opt as MutableList<ResOption.Data>)
                 }
-
             }
-
         }
-        // }
-
     }
+
 
     private fun getProps() {
         viewModel.getProps(subCategorySelectedId)
@@ -128,7 +122,7 @@ class CategoryActivity : AppCompatActivity() {
                         binding.llDynamicEditText.removeAllViews()
                         listEditMap.clear()
                         ids.clear()
-                        generateEditTextDynamic(propsList, false)
+                        generateEditTextDynamic(propsList)
                         binding.btnSubmit.isVisible = true
                     }
                 }
@@ -157,8 +151,7 @@ class CategoryActivity : AppCompatActivity() {
             }
             etSubCategory.setOnClickListener {
                 itemClickedBinding = etSubCategory
-                if (itemClickedId != -1)
-                    settingSubCategory()
+                if (itemClickedId != -1) settingSubCategory()
             }
 
             llToolbar.ivNext.setOnClickListener {
@@ -172,8 +165,7 @@ class CategoryActivity : AppCompatActivity() {
                         this@CategoryActivity,
                         "${item.key} => ${item.value.text}",
                         Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    ).show()
                 }
 
             }
@@ -184,6 +176,7 @@ class CategoryActivity : AppCompatActivity() {
     private fun settingSubCategory() {
         bottomSheet.apply {
             itemBottomSheetList.clear()
+            idsMapOption.clear()
 
             categoriesList.forEach { item ->
                 if (item.id == itemClickedId) {
@@ -191,10 +184,9 @@ class CategoryActivity : AppCompatActivity() {
                         item.children as MutableList<ResCategory.Data.Category.Children>
                 }
             }
-            if (::subCategoryList.isInitialized)
-                subCategoryList.forEach { item ->
-                    itemBottomSheetList.add(ItemListGeneralBottomSheet(item.name, item.id))
-                }
+            if (::subCategoryList.isInitialized) subCategoryList.forEach { item ->
+                itemBottomSheetList.add(ItemListGeneralBottomSheet(item.name, item.id))
+            }
             setListCategories(itemBottomSheetList, "Sub Category")
             show(supportFragmentManager, "categories_sheet")
 
@@ -206,28 +198,18 @@ class CategoryActivity : AppCompatActivity() {
         bottomSheet.apply {
             itemBottomSheetList.clear()
 
-
-            if (::categoriesList.isInitialized)
-                categoriesList.forEach { item ->
-                    itemBottomSheetList.add(ItemListGeneralBottomSheet(item.name, item.id))
-                }
+            if (::categoriesList.isInitialized) categoriesList.forEach { item ->
+                itemBottomSheetList.add(ItemListGeneralBottomSheet(item.name, item.id))
+            }
             setListCategories(itemBottomSheetList, "Main Category")
             show(supportFragmentManager, "categories_sheet")
         }
 
     }
 
-    private fun generateEditTextDynamic(props: MutableList<ResProps.Data>, optionChild: Boolean) {
-        var pos = 0
-        if (optionChild) {
-            propsList.forEachIndexed { index, item ->
-                if (item.id == optionSelectedIdWithoutOther) {
-                    pos = index
-                }
-            }
-        }
+    private fun generateEditTextDynamic(props: MutableList<ResProps.Data>) {
 
-        props.forEachIndexed { index, item ->
+        props.forEachIndexed { _, item ->
 
             val til = TextInputLayout(this)
             til.hint = item.name
@@ -235,49 +217,43 @@ class CategoryActivity : AppCompatActivity() {
             til.boxStrokeColor = ContextCompat.getColor(this, R.color.silverChalice)
             til.boxBackgroundMode = TextInputLayout.BOX_BACKGROUND_OUTLINE
 
-            val params: LinearLayout.LayoutParams =
-                LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
-                )
+            val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT
+            )
             params.setMargins(15, 25, 15, 25)
             til.layoutParams = params
 
             val et = TextInputEditText(til.context)
-            val etParams: LinearLayout.LayoutParams =
-                LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    150
-                )
+            val etParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 150
+            )
             et.layoutParams = etParams
             et.textSize = 14.0f
 
             if (item.options.isNotEmpty()) {
-                et.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
+                et.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0)
                 et.isFocusable = false
             }
 
 
 
             et.setOnClickListener {
-                // Toast.makeText(this, " clicked ${item.name}", Toast.LENGTH_SHORT).show()
+
+
                 if (item.options.isNotEmpty()) {
                     optionClickedName = item.name
                     itemClickedBinding = et
-                    if (!optionChild) optionSelectedIdWithoutOther = item.id
+                    optionSelectedIdWithoutOther = item.id
                     itemBottomSheetList.clear()
                     itemBottomSheetList.add(
                         ItemListGeneralBottomSheet(
-                            getString(R.string.other),
-                            OTHER_ID
+                            getString(R.string.other), OTHER_ID
                         )
                     )
                     item.options.forEach { item ->
                         itemBottomSheetList.add(
                             ItemListGeneralBottomSheet(
-                                item.name,
-                                item.id,
-                                item.child
+                                item.name, item.id, item.child
                             )
                         )
                     }
@@ -290,26 +266,7 @@ class CategoryActivity : AppCompatActivity() {
 
             listEditMap[item.name] = et
             til.addView(et)
-
-
-            if (optionChild) {
-                if (!ids.contains(item.id)) {
-                 /*   Toast.makeText(
-                        this@CategoryActivity,
-                        "$pos + $counterOfOther + $counterOfLastOption + $index",
-                        Toast.LENGTH_SHORT
-                    ).show()*/
-                    binding.llDynamicEditText.addView(
-                        til,
-                        pos + counterOfOther + counterOfLastOption + index + 1
-                    )
-                    counterOfLastOption++
-                    ids.add(item.id)
-                }
-
-            } else {
-                binding.llDynamicEditText.addView(til)
-            }
+            binding.llDynamicEditText.addView(til)
 
         }
 
@@ -332,29 +289,26 @@ class CategoryActivity : AppCompatActivity() {
         tilOther.boxStrokeColor = ContextCompat.getColor(this, R.color.silverChalice)
         tilOther.boxBackgroundMode = TextInputLayout.BOX_BACKGROUND_OUTLINE
 
-        val params: LinearLayout.LayoutParams =
-            LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
+        val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT
+        )
         params.setMargins(15, 25, 15, 25)
         tilOther.layoutParams = params
 
         val etOther = TextInputEditText(tilOther.context)
-        val etParams: LinearLayout.LayoutParams =
-            LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                150
-            )
+        val etParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, 150
+        )
         etOther.layoutParams = etParams
         etOther.textSize = 14.0f
         listEditMap["other_$name"] = etOther
         tilOther.addView(etOther)
-        binding.llDynamicEditText.addView(tilOther, pos + counterOfOther)
+        listEditMapOther["other_$name"] = tilOther
+        binding.llDynamicEditText.addView(tilOther, pos + counterOfOther + counterOfLastOption)
 
     }
 
-    private fun drawOptions(options: List<ResProps.Data.Option>) {
+    private fun drawOptions(options: MutableList<ResOption.Data>) {
         var pos = 0
         propsList.forEachIndexed { index, item ->
             if (item.id == optionSelectedIdWithoutOther) {
@@ -369,25 +323,59 @@ class CategoryActivity : AppCompatActivity() {
             tilOther.boxStrokeColor = ContextCompat.getColor(this, R.color.silverChalice)
             tilOther.boxBackgroundMode = TextInputLayout.BOX_BACKGROUND_OUTLINE
 
-            val params: LinearLayout.LayoutParams =
-                LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
-                )
+            val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT
+            )
             params.setMargins(15, 25, 15, 25)
             tilOther.layoutParams = params
 
             val etOther = TextInputEditText(tilOther.context)
-            val etParams: LinearLayout.LayoutParams =
-                LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    150
-                )
+            val etParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 150
+            )
             etOther.layoutParams = etParams
             etOther.textSize = 14.0f
-            listEditMap[item.name] = etOther
+
+            if (item.options.isNotEmpty()) {
+                etOther.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0)
+                etOther.isFocusable = false
+            }
+
+            etOther.setOnClickListener {
+                if (item.options.isNotEmpty()) {
+                    optionClickedName = item.name
+                    itemClickedBinding = etOther
+                    itemBottomSheetList.clear()
+                    itemBottomSheetList.add(
+                        ItemListGeneralBottomSheet(
+                            getString(R.string.other), OTHER_ID
+                        )
+                    )
+                    item.options.forEach { item ->
+                        itemBottomSheetList.add(
+                            ItemListGeneralBottomSheet(
+                                item.name, item.id, item.child
+                            )
+                        )
+                    }
+                    bottomSheet.setListCategories(itemBottomSheetList, item.name)
+                    bottomSheet.show(supportFragmentManager, "categories_sheet")
+
+                }
+            }
+
+
+
             tilOther.addView(etOther)
-            binding.llDynamicEditText.addView(tilOther, pos + counterOfOther + index)
+            if (!(idsMapOption.keys.contains(item.name) && idsMapOption.values.contains(item.id))) {
+                listEditMap[item.name] = etOther
+                idsMapOption.set(item.name, item.id)
+                binding.llDynamicEditText.addView(
+                    tilOther, pos + counterOfOther + counterOfLastOption + index + 1
+                )
+                counterOfLastOption++
+            }
+
 
         }
     }

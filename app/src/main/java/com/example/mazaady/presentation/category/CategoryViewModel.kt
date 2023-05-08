@@ -1,12 +1,12 @@
 package com.example.mazaady.presentation.category
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mazaady.domain.entities.ItemListGeneralBottomSheet
 import com.example.mazaady.domain.entities.ResCategory
+import com.example.mazaady.domain.entities.ResOption
 import com.example.mazaady.domain.entities.ResProps
 import com.example.mazaady.domain.usecase.GetUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,8 +32,8 @@ class CategoryViewModel @Inject constructor(
     private val _props: MutableStateFlow<ResProps?> = MutableStateFlow(null)
     val props: StateFlow<ResProps?> = _props
 
-    private val _options: MutableLiveData<ResProps?> = MutableLiveData()
-    val options: LiveData<ResProps?> = _options
+    private val _options: MutableStateFlow<ResOption?> = MutableStateFlow(null)
+    val options: StateFlow<ResOption?> = _options
 
     val setItemSelectedLiveDate = MutableLiveData<ItemListGeneralBottomSheet>()
 
@@ -61,6 +61,7 @@ class CategoryViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 Log.d("ZZzZZ", "getOptions: live data")
+                _options.value = null
                 _options.value = getUseCase.getOptions(id)
 
             } catch (e: Exception) {
