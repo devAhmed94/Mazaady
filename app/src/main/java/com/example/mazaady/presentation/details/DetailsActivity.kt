@@ -93,6 +93,7 @@ class DetailsActivity : AppCompatActivity() {
     private fun setupRvSameProducts() {
         binding.rvSameProducts.apply {
             layoutManager = LinearLayoutManager(this@DetailsActivity, HORIZONTAL, false)
+
             setHasFixedSize(false)
             adapter = sameProductsAdapter.apply { fill(sameProducts) }
         }
