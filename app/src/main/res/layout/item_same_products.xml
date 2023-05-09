@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/_150sdp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_8sdp"
+    android:background="@drawable/bg_item_same_product"
+    android:padding="@dimen/_3sdp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/rivImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_95sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/car3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_corner_radius="@dimen/_6sdp"
+        app:riv_mutate_background="true" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_7sdp"
+        android:src="@drawable/circle_white_love"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_mazady_live"
+        android:fontFamily="@font/tajawal_bold"
+        android:padding="@dimen/_4sdp"
+        android:text="مزاد مباشر"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_8ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/rivImage"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNameProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/tajawal_medium"
+        android:text="سيارة سريعة بى ام دابليو تصنيع 2021 حالته جديدة"
+        android:textColor="@color/codGray"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@+id/rivImage" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvStartAfter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:fontFamily="@font/tajawal_medium"
+        android:gravity="center"
+        android:text="يبدأ بعد"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/_9ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvStartMazady"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameProduct" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvStartMazady"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/tajawal_medium"
+        android:gravity="center"
+        android:text="بداية المزاد"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/_9ssp"
+        app:layout_constraintEnd_toStartOf="@+id/tvStartAfter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvStartAfter" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvStartAfterValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/tajawal_bold"
+        android:gravity="center"
+        android:text="3 :22:55"
+        android:textColor="@color/codGray"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="@+id/tvStartAfter"
+        app:layout_constraintStart_toStartOf="@+id/tvStartAfter"
+        app:layout_constraintTop_toBottomOf="@+id/tvStartAfter" />
+
+    <TableRow
+        android:id="@+id/trTimeInterval"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvStartAfterValue"
+        app:layout_constraintStart_toStartOf="@+id/tvStartAfterValue"
+        app:layout_constraintTop_toBottomOf="@+id/tvStartAfterValue">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/tajawal_medium"
+            android:gravity="center"
+            android:text="يوم"
+            android:textColor="@color/codGray"
+            android:textSize="@dimen/_7ssp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/tajawal_medium"
+            android:gravity="center"
+            android:text="س"
+            android:textColor="@color/codGray"
+            android:textSize="@dimen/_7ssp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="@font/tajawal_medium"
+            android:text="د"
+            android:textColor="@color/codGray"
+            android:textSize="@dimen/_7ssp" />
+
+    </TableRow>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvPriceStartMazady"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/tajawal_bold"
+        android:text="20000"
+        android:textColor="@color/Pomegranate"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintEnd_toEndOf="@+id/tvStartMazady"
+        app:layout_constraintStart_toStartOf="@+id/tvStartMazady"
+        app:layout_constraintTop_toBottomOf="@+id/tvStartMazady" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/tajawal_medium"
+        android:text="ريال"
+        android:textColor="@color/Pomegranate"
+        android:textSize="@dimen/_7ssp"
+        app:layout_constraintEnd_toEndOf="@+id/tvPriceStartMazady"
+        app:layout_constraintStart_toStartOf="@+id/tvPriceStartMazady"
+        app:layout_constraintTop_toBottomOf="@id/tvPriceStartMazady" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

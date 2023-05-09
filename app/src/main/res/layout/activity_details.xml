@@ -11,458 +11,738 @@
         layout="@layout/toolbar"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llToolbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingBottom="@dimen/_15sdp"
+            app:layout_constraintBottom_toTopOf="@+id/clBottom"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clHeader"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_230sdp"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/vpImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:alpha=".4"
-                    android:background="@color/black"
-                    app:layout_constraintBottom_toBottomOf="@id/vpImage"
-                    app:layout_constraintTop_toTopOf="@id/vpImage" />
-
-                <View
-                    android:layout_width="@dimen/_45sdp"
-                    android:layout_height="match_parent"
-                    android:alpha=".5"
-                    android:background="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivArrowFront"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:src="@drawable/ic__arrow_forward"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:src="@drawable/ic_categories"
-                    app:layout_constraintEnd_toEndOf="@+id/ivArrowFront"
-                    app:layout_constraintStart_toStartOf="@+id/ivArrowFront"
-                    app:layout_constraintTop_toBottomOf="@+id/ivArrowFront" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivHeart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:src="@drawable/ic_empty_fav"
-                    app:layout_constraintEnd_toEndOf="@+id/ivArrowFront"
-                    app:layout_constraintStart_toStartOf="@+id/ivArrowFront"
-                    app:layout_constraintTop_toBottomOf="@+id/ivCategory" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivCalender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:src="@drawable/ic_calender"
-                    app:layout_constraintEnd_toEndOf="@+id/ivArrowFront"
-                    app:layout_constraintStart_toStartOf="@+id/ivArrowFront"
-                    app:layout_constraintTop_toBottomOf="@+id/ivHeart" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivFlag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:src="@drawable/ic_flag"
-                    app:layout_constraintEnd_toEndOf="@+id/ivArrowFront"
-                    app:layout_constraintStart_toStartOf="@+id/ivArrowFront"
-                    app:layout_constraintTop_toBottomOf="@+id/ivCalender" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivShare"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:src="@drawable/ic_share"
-                    app:layout_constraintEnd_toEndOf="@+id/ivArrowFront"
-                    app:layout_constraintStart_toStartOf="@+id/ivArrowFront"
-                    app:layout_constraintTop_toBottomOf="@+id/ivFlag" />
-
-                <com.rd.PageIndicatorView
-                    android:id="@+id/piSlider"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_50sdp"
-                    android:background="@drawable/bg_indication"
-                    app:layout_constraintBottom_toBottomOf="@+id/clHeader"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:piv_animationType="slide"
-                    app:piv_dynamicCount="true"
-                    app:piv_interactiveAnimation="true"
-                    app:piv_selectedColor="@color/white"
-                    app:piv_unselectedColor="@color/black"
-                    app:piv_viewPager="@id/vpImage" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cartInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_45sdp"
-                android:layout_marginTop="@dimen/_195sdp"
-                android:background="@color/white"
-                app:cardCornerRadius="@dimen/_8sdp"
-                app:elevation="@dimen/_10sdp"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clHeader"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/_5sdp">
+                    android:layout_height="@dimen/_230sdp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vpImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:alpha=".72"
+                        android:background="@color/mineShaft"
+                        app:layout_constraintBottom_toBottomOf="@id/vpImage"
+                        app:layout_constraintTop_toTopOf="@id/vpImage" />
+
+                    <View
+                        android:layout_width="@dimen/_43sdp"
+                        android:layout_height="match_parent"
+                        android:background="@color/codGray60"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvStartingTime"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_11sdp"
+                        android:background="@drawable/bg_indication"
+                        android:fontFamily="@font/tajawal_medium"
+                        android:text="02:00 m"
                         android:gravity="center"
-                        android:text="المزاد يبدا بعد "
-                        android:textColor="@color/doveGray"
-                        android:textSize="@dimen/_13ssp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivArrowFront"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_14sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:src="@drawable/ic_previous"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/tvDateCalender"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:src="@drawable/ic_category_orginal"
+                        app:layout_constraintEnd_toEndOf="@+id/ivArrowFront"
+                        app:layout_constraintStart_toStartOf="@+id/ivArrowFront"
+                        app:layout_constraintTop_toBottomOf="@+id/ivArrowFront" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivHeart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:src="@drawable/noun_love"
+                        app:layout_constraintEnd_toEndOf="@+id/ivArrowFront"
+                        app:layout_constraintStart_toStartOf="@+id/ivArrowFront"
+                        app:layout_constraintTop_toBottomOf="@+id/ivCategory" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivCalender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:src="@drawable/date_range"
+                        app:layout_constraintEnd_toEndOf="@+id/ivArrowFront"
+                        app:layout_constraintStart_toStartOf="@+id/ivArrowFront"
+                        app:layout_constraintTop_toBottomOf="@+id/ivHeart" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivFlag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:src="@drawable/flag_black"
+                        app:layout_constraintEnd_toEndOf="@+id/ivArrowFront"
+                        app:layout_constraintStart_toStartOf="@+id/ivArrowFront"
+                        app:layout_constraintTop_toBottomOf="@+id/ivCalender" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivShare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:src="@drawable/share_black"
+                        app:layout_constraintEnd_toEndOf="@+id/ivArrowFront"
+                        app:layout_constraintStart_toStartOf="@+id/ivArrowFront"
+                        app:layout_constraintTop_toBottomOf="@+id/ivFlag" />
+
+                    <com.rd.PageIndicatorView
+                        android:id="@+id/piSlider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_50sdp"
+                        android:background="@drawable/bg_indication"
+                        app:layout_constraintBottom_toBottomOf="@+id/clHeader"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:piv_animationType="slide"
+                        app:piv_dynamicCount="true"
+                        app:piv_interactiveAnimation="true"
+                        app:piv_selectedColor="@color/white"
+                        app:piv_unselectedColor="@color/black"
+                        app:piv_viewPager="@id/vpImage" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cartInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_45sdp"
+                    android:layout_marginTop="@dimen/_195sdp"
+                    android:background="@color/white"
+                    app:cardCornerRadius="@dimen/_6sdp"
+                    app:elevation="@dimen/_10sdp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvStartingTime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/tajawal_medium"
+                            android:gravity="center"
+                            android:text="المزاد يبدأ بعد"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_10ssp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/tvDateCalender"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDateValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/tajawal_bold"
+                            android:text="31:22:55"
+                            android:textColor="@color/Gamboge"
+                            android:textSize="@dimen/_15sdp"
+                            app:layout_constraintEnd_toEndOf="@+id/tvStartingTime"
+                            app:layout_constraintStart_toStartOf="@+id/tvStartingTime"
+                            app:layout_constraintTop_toBottomOf="@+id/tvStartingTime" />
+
+                        <TableRow
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="@+id/tvDateValue"
+                            app:layout_constraintStart_toStartOf="@+id/tvDateValue"
+                            app:layout_constraintTop_toBottomOf="@+id/tvDateValue">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/tajawal_medium"
+                                android:text="يوم"
+                                android:textColor="@color/Gamboge"
+                                android:textSize="@dimen/_6ssp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/tajawal_medium"
+                                android:text="ساعة"
+                                android:textColor="@color/Gamboge"
+                                android:textSize="@dimen/_6ssp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/tajawal_medium"
+                                android:text="دقيقة"
+                                android:textColor="@color/Gamboge"
+                                android:textSize="@dimen/_6ssp" />
+
+                        </TableRow>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDateCalender"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/tajawal_medium"
+                            android:gravity="center"
+                            android:text="بتاريخ"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_10ssp"
+                            app:layout_constraintEnd_toStartOf="@+id/tvStartingTime"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDateCalenderValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/tajawal_bold"
+                            android:text="26-11-2021"
+                            android:textColor="@color/Jacarta"
+                            android:textSize="@dimen/_15sdp"
+                            app:layout_constraintEnd_toEndOf="@+id/tvDateCalender"
+                            app:layout_constraintStart_toStartOf="@+id/tvDateCalender"
+                            app:layout_constraintTop_toBottomOf="@+id/tvDateCalender" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/tajawal_medium"
+                            android:text="31:22:55"
+                            android:textColor="@color/Jacarta"
+                            android:textSize="@dimen/_10ssp"
+                            app:layout_constraintEnd_toEndOf="@+id/tvDateCalenderValue"
+                            app:layout_constraintStart_toStartOf="@+id/tvDateCalenderValue"
+                            app:layout_constraintTop_toBottomOf="@+id/tvDateCalenderValue" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNameMazady"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_19sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:fontFamily="@font/tajawal_bold"
+                    android:text="اسم المزاد"
+                    android:textColor="@color/codGray"
+                    android:textSize="@dimen/_15ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cartInfo" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="code 1234"
+                    android:textSize="@dimen/_11ssp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvNameMazady"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameMazady"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNameMazady" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:drawableStart="@drawable/previous_arrow"
+                    android:drawablePadding="@dimen/_6sdp"
+                    android:fontFamily="@font/tajawal_bold"
+                    android:text="تفاصيل المزاد"
+                    android:textColor="@color/Razzmatazz"
+                    android:textSize="@dimen/_11ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvNameMazady"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvNameMazady" />
+
+                <com.willy.ratingbar.ScaleRatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:numStars="5"
+                    android:stepSize="1.0"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCode"
+                    app:layout_goneMarginTop="@dimen/_5sdp"
+                    app:srb_drawableEmpty="@drawable/gray_star"
+                    app:srb_drawableFilled="@drawable/yellow_star"
+                    app:srb_rating="4"
+                    app:srb_starPadding="@dimen/_3sdp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:drawableStart="@drawable/previous_arrow"
+                    android:drawablePadding="@dimen/_6sdp"
+                    android:fontFamily="@font/tajawal_bold"
+                    android:text="تقييم المزاد"
+                    android:textColor="@color/Razzmatazz"
+                    android:textSize="@dimen/_11ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCurrentVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="القيمة الحالية للمزاد"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_11ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCurrentPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:fontFamily="@font/tajawal_black"
+                    android:text="200$"
+                    android:textColor="@color/Jacarta"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvCurrentVal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvCurrentVal" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_3sdp"
+                    android:layout_marginHorizontal="@dimen/_3sdp"
+                    android:background="@drawable/bg_dot_line"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvCurrentVal"
+                    app:layout_constraintEnd_toStartOf="@+id/tvCurrentVal"
+                    app:layout_constraintStart_toEndOf="@+id/tvCurrentPrice"
+                    app:layout_constraintTop_toTopOf="@+id/tvCurrentVal" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCurrentValAfterTax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="القيمة الحالية بعد الضريبة"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_11ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCurrentVal" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCurrentPriceAfterTax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:fontFamily="@font/tajawal_black"
+                    android:text="200$"
+                    android:textColor="@color/Jacarta"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvCurrentValAfterTax"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvCurrentValAfterTax" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_3sdp"
+                    android:layout_marginHorizontal="@dimen/_3sdp"
+                    android:background="@drawable/bg_dot_line"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvCurrentValAfterTax"
+                    app:layout_constraintEnd_toStartOf="@+id/tvCurrentValAfterTax"
+                    app:layout_constraintStart_toEndOf="@+id/tvCurrentPriceAfterTax"
+                    app:layout_constraintTop_toTopOf="@+id/tvCurrentValAfterTax" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clBtns"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_price_current"
+                    android:padding="@dimen/_15sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCurrentPriceAfterTax">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvPriceCache"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:fontFamily="@font/tajawal_bold"
+                        android:text="سعر الشراء الفورى"
+                        android:textColor="@color/codGray"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvDateValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="31:22:55"
-                        android:textColor="@color/Gamboge"
-                        android:textSize="@dimen/_16sdp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/tvStartingTime"
-                        app:layout_constraintStart_toStartOf="@+id/tvStartingTime"
-                        app:layout_constraintTop_toBottomOf="@+id/tvStartingTime" />
+                        android:fontFamily="@font/tajawal_bold"
+                        android:text="200$"
+                        android:textColor="@color/Jacarta"
+                        android:textSize="@dimen/_15ssp"
+                        app:layout_constraintEnd_toEndOf="@+id/tvPriceCache"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPriceCache" />
 
-                    <TableRow
-                        android:layout_width="0dp"
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnPulling"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_29sdp"
+                        android:background="@drawable/bg_btn_pulling"
+                        android:fontFamily="@font/tajawal_bold"
+                        android:text="انسحاب"
+                        android:textColor="@color/Razzmatazz"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPriceCache" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnBuying"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_29sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:background="@drawable/bg_btn_buying"
+                        android:fontFamily="@font/tajawal_bold"
+                        android:text="شراء الان"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintStart_toEndOf="@+id/btnPulling"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPriceCache" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMazader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:drawableEnd="@drawable/ic_mazader"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="المزايدون"
+                    android:textColor="@color/codGray"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clBtns" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:drawableStart="@drawable/previous_arrow"
+                    android:drawablePadding="@dimen/_6sdp"
+                    android:fontFamily="@font/tajawal_bold"
+                    android:text="عرض الكل"
+                    android:textColor="@color/Razzmatazz"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvMazader"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvMazader" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMazaders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:clipToPadding="false"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMazader" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clSeller"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:background="@color/SelectiveYellow12"
+                    app:layout_constraintTop_toBottomOf="@+id/rvMazaders">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivYellowLove"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="@+id/tvDateValue"
-                        app:layout_constraintStart_toStartOf="@+id/tvDateValue"
-                        app:layout_constraintTop_toBottomOf="@+id/tvDateValue">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="ثانيه"
-                            android:textColor="@color/Gamboge"
-                            android:textSize="@dimen/_10ssp" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="ساعه"
-                            android:textColor="@color/Gamboge"
-                            android:textSize="@dimen/_10ssp" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="دقيقه"
-                            android:textColor="@color/Gamboge"
-                            android:textSize="@dimen/_10ssp" />
-
-                    </TableRow>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvDateCalender"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="التاريخ"
-                        android:textColor="@color/doveGray"
-                        android:textSize="@dimen/_13ssp"
-                        app:layout_constraintEnd_toStartOf="@+id/tvStartingTime"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:src="@drawable/circle_yellow_love"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvDateCalenderValue"
+                        android:id="@+id/tvSeller"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="26-11-2021"
-                        android:textColor="@color/Jacarta"
-                        android:textSize="@dimen/_16sdp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/tvDateCalender"
-                        app:layout_constraintStart_toStartOf="@+id/tvDateCalender"
-                        app:layout_constraintTop_toBottomOf="@+id/tvDateCalender" />
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:drawableEnd="@drawable/seller"
+                        android:drawablePadding="@dimen/_3sdp"
+                        android:fontFamily="@font/tajawal_medium"
+                        android:gravity="center"
+                        android:text="البائع"
+                        android:textColor="@color/codGray"
+                        android:textSize="@dimen/_13ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civProfile"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:src="@drawable/car3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvSeller" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="31:22:55"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:fontFamily="@font/tajawal_bold"
+                        android:text="اسم البائع"
                         android:textColor="@color/Jacarta"
-                        android:textSize="@dimen/_14ssp"
-                        app:layout_constraintEnd_toEndOf="@+id/tvDateCalenderValue"
-                        app:layout_constraintStart_toStartOf="@+id/tvDateCalenderValue"
-                        app:layout_constraintTop_toBottomOf="@+id/tvDateCalenderValue" />
+                        android:textSize="@dimen/_13ssp"
+                        app:layout_constraintEnd_toStartOf="@+id/civProfile"
+                        app:layout_constraintTop_toTopOf="@+id/civProfile" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:fontFamily="@font/tajawal_medium"
+                        android:text="+966598398"
+                        android:textColor="@color/Jacarta"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintEnd_toStartOf="@+id/civProfile"
+                        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+                    <com.willy.ratingbar.ScaleRatingBar
+                        android:id="@+id/ratingBarItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:numStars="5"
+                        android:stepSize="1.0"
+                        app:layout_constraintEnd_toEndOf="@+id/tvDate"
+                        app:layout_constraintTop_toBottomOf="@+id/tvDate"
+                        app:srb_drawableEmpty="@drawable/gray_star"
+                        app:srb_drawableFilled="@drawable/yellow_star"
+                        app:srb_rating="4"
+                        app:srb_starPadding="@dimen/_3sdp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvProducts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:fontFamily="@font/tajawal_medium"
+                        android:text="4 منتجات"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintEnd_toEndOf="@+id/ratingBarItem"
+                        app:layout_constraintTop_toBottomOf="@+id/ratingBarItem" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvNameMazady"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:text="اسم المزايد"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cartInfo" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="code 1234"
-                android:textSize="@dimen/_10ssp"
-                app:layout_constraintEnd_toEndOf="@+id/tvNameMazady"
-                app:layout_constraintStart_toStartOf="@+id/tvNameMazady"
-                app:layout_constraintTop_toBottomOf="@+id/tvNameMazady" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:drawableStart="@drawable/ic_arrow_back"
-                android:drawableTint="@color/shockingPink"
-                android:text="تفاصيل المزاد"
-                android:textColor="@color/shockingPink"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvNameMazady"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvNameMazady" />
-
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="-30dp"
-                android:numStars="5"
-                android:progressBackgroundTint="@color/doveGray"
-                android:progressTint="@color/Gamboge"
-                android:scaleX="0.5"
-                android:scaleY="0.5"
-                android:stepSize="0.5"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCode" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:drawableStart="@drawable/ic_arrow_back"
-                android:drawableTint="@color/shockingPink"
-                android:text="تقييم المزاد"
-                android:textColor="@color/shockingPink"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ratingBar"
-                app:layout_goneMarginStart="@dimen/_15sdp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvCurrentVal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:text="القيمه الحاليه للمزاد"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvCurrentPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:text="200$"
-                android:textColor="@color/shockingPink"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvCurrentVal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvCurrentVal" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_3sdp"
-                android:layout_marginHorizontal="@dimen/_3sdp"
-                android:background="@drawable/bg_dot_line"
-                app:layout_constraintBottom_toBottomOf="@+id/tvCurrentVal"
-                app:layout_constraintEnd_toStartOf="@+id/tvCurrentVal"
-                app:layout_constraintStart_toEndOf="@+id/tvCurrentPrice"
-                app:layout_constraintTop_toTopOf="@+id/tvCurrentVal" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvCurrentValAfterTax"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:text="القيمه الحاليه بعد الضريبه"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCurrentVal" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvCurrentPriceAfterTax"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:text="200$"
-                android:textColor="@color/shockingPink"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvCurrentValAfterTax"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvCurrentValAfterTax" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_3sdp"
-                android:layout_marginHorizontal="@dimen/_3sdp"
-                android:background="@drawable/bg_dot_line"
-                app:layout_constraintBottom_toBottomOf="@+id/tvCurrentValAfterTax"
-                app:layout_constraintEnd_toStartOf="@+id/tvCurrentValAfterTax"
-                app:layout_constraintStart_toEndOf="@+id/tvCurrentPriceAfterTax"
-                app:layout_constraintTop_toTopOf="@+id/tvCurrentValAfterTax" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clBtns"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_price_current"
-                android:padding="@dimen/_15sdp"
-                app:layout_constraintTop_toBottomOf="@+id/tvCurrentPriceAfterTax">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvPriceCache"
+                    android:id="@+id/tvSameProducts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="سعر الشراء الفوري "
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp"
-                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:drawableEnd="@drawable/box"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:fontFamily="@font/tajawal_medium"
+                    android:text="منتجات متشابهه"
+                    android:textColor="@color/codGray"
+                    android:textSize="@dimen/_13ssp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/clSeller" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="200$"
-                    android:textColor="@color/Jacarta"
-                    android:textSize="@dimen/_14ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/tvPriceCache"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPriceCache" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnPulling"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_35sdp"
-                    android:background="@drawable/bg_btn_pulling"
-                    android:text="انسحاب"
-                    android:textColor="@color/shockingPink"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPriceCache" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnBuying"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_35sdp"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:background="@drawable/bg_btn_buying"
-                    android:text="شراء الان"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/btnPulling"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPriceCache" />
+                    android:drawableStart="@drawable/previous_arrow"
+                    android:drawablePadding="@dimen/_6sdp"
+                    android:fontFamily="@font/tajawal_bold"
+                    android:text="عرض الكل"
+                    android:textColor="@color/Razzmatazz"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvSameProducts"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvSameProducts" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSameProducts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:clipToPadding="false"
+                    android:paddingStart="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSameProducts" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvMazader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_75sdp"
+            android:background="@drawable/custom_shadow"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clBottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_115sdp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnOne"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginTop="@dimen/_19sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:drawableEnd="@drawable/ic_baseline_biotech_24"
-                android:text="المزايدون"
-                android:textColor="@color/doveGray"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
+                android:background="@drawable/bg_btn_numbers"
+                android:text="+10000"
+                android:textColor="@color/white1"
+                android:textSize="@dimen/_13ssp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/clBtns" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnTwo"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:background="@drawable/bg_btn_numbers"
+                android:text="+10000"
+                android:textColor="@color/white1"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toStartOf="@+id/btnOne"
+                app:layout_constraintTop_toTopOf="@+id/btnOne" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnThee"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:background="@drawable/bg_btn_numbers"
+                android:text="+10000"
+                android:textColor="@color/white1"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toStartOf="@+id/btnTwo"
+                app:layout_constraintTop_toTopOf="@+id/btnTwo" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCurrentValueOfMazaady"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
-                android:drawableStart="@drawable/ic_arrow_back"
-                android:drawableTint="@color/shockingPink"
-                android:text="عرض الكل"
-                android:textColor="@color/shockingPink"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMazader"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/tajawal_medium"
+                android:text="القيمة الحالية للمزاد"
+                android:textColor="@color/codGray"
+                android:textSize="@dimen/_11ssp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvMazader" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMazaders"
-                android:layout_width="match_parent"
-                android:paddingBottom="@dimen/_20sdp"
-                android:clipToPadding="false"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tvMazader" />
+                android:fontFamily="@font/tajawal_extrabold"
+                android:text="200 $"
+                android:textColor="@color/Jacarta"
+                android:textSize="@dimen/_17ssp"
+                app:layout_constraintEnd_toEndOf="@+id/tvCurrentValueOfMazaady"
+                app:layout_constraintStart_toStartOf="@+id/tvCurrentValueOfMazaady"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentValueOfMazaady" />
 
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etWritePrice"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/bg_et_write_value"
+                android:hint="اكتب المبلغ"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:textColor="@color/codGray"
+                android:textColorHint="@color/codGray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivSend"
+                app:layout_constraintTop_toBottomOf="@+id/btnOne" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_13sdp"
+                android:src="@drawable/send_black"
+                app:layout_constraintBottom_toBottomOf="@id/etWritePrice"
+                app:layout_constraintEnd_toStartOf="@id/etWritePrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/etWritePrice" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

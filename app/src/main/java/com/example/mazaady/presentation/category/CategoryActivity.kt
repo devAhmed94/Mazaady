@@ -3,6 +3,7 @@ package com.example.mazaady.presentation.category
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -83,7 +84,8 @@ class CategoryActivity : AppCompatActivity() {
 
                 if (listEditMapOther.keys.contains("other_${optionClickedName}")) {
                     binding.llDynamicEditText.removeView(listEditMapOther["other_$optionClickedName"])
-                    counterOfOther--
+                    if (counterOfOther > 0)
+                        counterOfOther--
                 }
 
                 if (it.id == OTHER_ID) {
@@ -304,6 +306,7 @@ class CategoryActivity : AppCompatActivity() {
         listEditMap["other_$name"] = etOther
         tilOther.addView(etOther)
         listEditMapOther["other_$name"] = tilOther
+        Log.d("ZZzZZ", "drawOther:$pos + $counterOfOther + $counterOfLastOption +   ")
         binding.llDynamicEditText.addView(tilOther, pos + counterOfOther + counterOfLastOption)
 
     }
@@ -370,6 +373,10 @@ class CategoryActivity : AppCompatActivity() {
             if (!(idsMapOption.keys.contains(item.name) && idsMapOption.values.contains(item.id))) {
                 listEditMap[item.name] = etOther
                 idsMapOption.set(item.name, item.id)
+                Log.d(
+                    "ZZzZZ",
+                    "drawOptions:$pos + $counterOfOther + $counterOfLastOption + $index  "
+                )
                 binding.llDynamicEditText.addView(
                     tilOther, pos + counterOfOther + counterOfLastOption + index + 1
                 )
