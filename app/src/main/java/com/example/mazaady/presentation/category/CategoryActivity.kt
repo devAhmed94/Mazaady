@@ -45,12 +45,15 @@ class CategoryActivity : AppCompatActivity() {
     private var optionSelectedIdWithoutOther = -1
     private var counterOfOther = 0
     private var counterOfLastOption = 0
+    private var lastItemPro = ""
 
     private val listEditMap by lazy { HashMap<String, TextInputEditText>() }
     private val listEditMapOther by lazy { HashMap<String, TextInputLayout>() }
+    private val listEditMapOptions by lazy { HashMap<String, TextInputLayout>() }
     private val ids by lazy { mutableListOf<Int>() }
 
     private val idsMapOption by lazy { HashMap<String, Int>() }
+    private val subCategoryWithMapOptions by lazy { HashMap<String, HashMap<String, Int>>() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +78,7 @@ class CategoryActivity : AppCompatActivity() {
                 }
 
             } else if (itemClickedBinding == binding.etSubCategory) {
+
                 subCategorySelectedId = it.id
                 counterOfOther = 0
                 counterOfLastOption = 0
@@ -89,6 +93,18 @@ class CategoryActivity : AppCompatActivity() {
                 }
 
                 if (it.id == OTHER_ID) {
+                    if (subCategoryWithMapOptions.keys.contains(lastItemPro)){
+                        subCategoryWithMapOptions[lastItemPro]?.keys?.forEach { item ->
+                            binding.llDynamicEditText.removeView(listEditMapOptions[item])
+                            if (counterOfLastOption > 0)
+                                counterOfLastOption--
+                        }
+
+                        idsMapOption.clear()
+                        listEditMapOptions.clear()
+                    }
+
+
                     counterOfOther++
                     drawOther(optionSelectedIdWithoutOther)
 
@@ -179,6 +195,8 @@ class CategoryActivity : AppCompatActivity() {
         bottomSheet.apply {
             itemBottomSheetList.clear()
             idsMapOption.clear()
+            listEditMapOptions.clear()
+            subCategoryWithMapOptions.clear()
 
             categoriesList.forEach { item ->
                 if (item.id == itemClickedId) {
@@ -243,6 +261,7 @@ class CategoryActivity : AppCompatActivity() {
 
 
                 if (item.options.isNotEmpty()) {
+                    lastItemPro = item.name
                     optionClickedName = item.name
                     itemClickedBinding = et
                     optionSelectedIdWithoutOther = item.id
@@ -370,9 +389,13 @@ class CategoryActivity : AppCompatActivity() {
 
 
             tilOther.addView(etOther)
+            Log.d("ZZzZZ", "drawOptions: ${idsMapOption.toList()}")
             if (!(idsMapOption.keys.contains(item.name) && idsMapOption.values.contains(item.id))) {
+
+                listEditMapOptions[item.name] = tilOther
                 listEditMap[item.name] = etOther
                 idsMapOption.set(item.name, item.id)
+                subCategoryWithMapOptions[lastItemPro] = idsMapOption
                 Log.d(
                     "ZZzZZ",
                     "drawOptions:$pos + $counterOfOther + $counterOfLastOption + $index  "
